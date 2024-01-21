@@ -21,7 +21,7 @@ class StudentController extends Controller
 
     public function update(Request $request, $id){
         $student = Student::find($id);
-        $student = update($request->all());
+        $student->update($request->all());
         $student->academic()->update($request->input('academic'));
         $student->country()->update($request->input('country'));
         return response()->json(['student'=>$student]);
