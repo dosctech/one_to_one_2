@@ -16,7 +16,6 @@ class Country extends Model
         "capital"
     ];
 
-
     public function student()
     {
         return $this->belongsTo(Student::class);

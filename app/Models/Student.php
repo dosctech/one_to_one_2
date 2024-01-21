@@ -17,11 +17,11 @@ class Student extends Model
     ];
 
     public function academic(){
-        return $this->hasOne(Academic::class);
+        return $this->hasOne(Academic::class, 'student_acad_id', 'id');
     }
 
     public function country(){
-        return $this->hasOne(Country::class);
+        return $this->hasOne(Country::class, 'student_country_id', 'id');
     }
 
 }
