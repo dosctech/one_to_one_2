@@ -7,8 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Academic extends Model
 {
-    protected $fillable = ["course", "year"];
+
     use HasFactory;
+
+    protected $fillable = [
+        "course",
+        "year"
+    ];
 
     public function student()
     {

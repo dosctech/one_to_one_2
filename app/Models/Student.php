@@ -7,8 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-    protected $fillable = ["name", "age", "address"];
+
     use HasFactory;
+
+    protected $fillable = [
+        "name",
+        "age",
+        "address"
+    ];
 
     public function academic(){
         return $this->hasOne(Academic::class);

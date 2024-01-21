@@ -7,8 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model
 {
-    protected $fillable = ["continent", "name", "capital"];
+
     use HasFactory;
+
+    protected $fillable = [
+        "continent",
+        "name",
+        "capital"
+    ];
+
 
     public function student()
     {
