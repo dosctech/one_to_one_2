@@ -34,8 +34,11 @@ In this view, add a delete button  for each data rendered, and if the delete dat
                                             <td>{{ $item->age }}</td>
                                             <td>{{ $item->address }}</td>
                                             <td>
-                                            <a href="{{url('edit')}}" class="btn btn-primary btn-sm" title="Edit data">Edit</a>
-                                            <a href="" class="btn btn-danger btn-sm" title="Delete data">Delete</a>
+                                            <a href="{{url('students/'.$item->id.'/display')}}" class="btn btn-primary btn-sm" title="View Student data">View</a>
+                                            <a href="{{url('students/'.$item->id.'/edit')}}" class="btn btn-secondary btn-sm" title="Edit Student data">Edit</a>
+
+                                            <a href="#" class="btn btn-danger btn-sm" title="Delete Student data">Delete</a>
+
                                         </td>
                                         </tr>
                                     @endforeach

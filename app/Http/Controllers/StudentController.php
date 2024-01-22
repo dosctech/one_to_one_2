@@ -8,11 +8,15 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     /*
-    Show database in view
+    Show data in view
     */
     public function show(){
         $students = Student::with('academic', 'country')->get();
         return view("Index")->with("students", $students);
+    }
+
+    public function display(Student $student){
+        return view('showStudent', compact('student'));
     }
 
     public function index(){
@@ -35,6 +39,13 @@ class StudentController extends Controller
         ]);
 
         return response()->json(["message"=>"Successfully inserted data."]);
+    }
+
+    /*
+        Edit data in view
+    */
+    public function edit(Student $student){
+        return view('Edit', compact('student'));
     }
 
     public function update(Request $request, $id){

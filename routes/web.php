@@ -17,14 +17,12 @@ use App\Http\Controllers\StudentController;
 //     return view('welcome');
 // });
 
-Route::get('/create', function(){
-    return view('Create');
-});
-
-Route::get('/edit', function(){
-    return view('Edit');
-});
-
 Route::get('/', [StudentController::class, 'show']);
 
-Route::post('/students', [StudentController::class, 'store']);
+Route::get('students/{student}/edit', [StudentController::class, 'edit']);
+
+Route::get('students/{student}/display', [StudentController::class, 'display']);
+
+Route::get("/profile", function(){
+    return view('showStudent');
+});
