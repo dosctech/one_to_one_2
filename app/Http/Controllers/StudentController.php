@@ -12,7 +12,7 @@ class StudentController extends Controller
     */
     public function show(){
         $students = Student::with('academic', 'country')->get();
-        return view("index")->with("students", $students);
+        return view("Index")->with("students", $students);
     }
 
     public function index(){
@@ -22,9 +22,19 @@ class StudentController extends Controller
 
     public function store(Request $request){
         $student = Student::create($request->all());
-        $student->academic()->create($request->input('academic'));
-        $student->country()->create($request->input('country'));
-        return response()->json($student, 201);
+
+        $student->academic()->create([
+            'course' => $request->course,
+            'year' => $request->year
+        ]);
+
+        $student->country()->create([
+            'continent' => $request->continent,
+            'country_name' => $request->country_name,
+            'capital' => $request->capital
+        ]);
+
+        return response()->json(["message"=>"Successfully inserted data."]);
     }
 
     public function update(Request $request, $id){
