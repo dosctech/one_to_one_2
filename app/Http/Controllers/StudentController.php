@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+    /*
+    Show database in view
+    */
+    public function show(){
+        $students = Student::with('academic', 'country')->get();
+        return view("index")->with("students", $students);
+    }
+
     public function index(){
         $students = Student::with('academic', 'country')->get();
         return response()->json(['students'=>$students]);

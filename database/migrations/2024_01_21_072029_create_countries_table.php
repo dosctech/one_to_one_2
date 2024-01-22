@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('continent');
-            $table->string('name');
+            $table->string('country_name');
             $table->string('capital');
             $table->bigInteger('student_country_id')->unsigned();
             $table->foreign('student_country_id')->references('id')->on('students');
