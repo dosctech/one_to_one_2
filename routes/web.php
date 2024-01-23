@@ -19,7 +19,13 @@ use App\Http\Controllers\StudentController;
 
 Route::get('/', [StudentController::class, 'show']);
 
+Route::get('/create', function(){
+    return view('Create');
+});
+
 Route::get('students/{student}/edit', [StudentController::class, 'edit']);
+
+Route::get('students/{student}', [StudentController::class, 'update']);
 
 Route::get('students/{student}/display', [StudentController::class, 'display']);
 

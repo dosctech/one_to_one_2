@@ -4,7 +4,10 @@
     <div class="card-header" style="margin:20px"><h1>Edit Student</h1></div>
     <div class="card-body">
 
-        <form action="{{url('students')}}" method="POST">
+        <!--
+        Update student form
+        -->
+        <form action="{{url('students/'.$student->id)}}" method="POST">
             @csrf
             @method('PUT')
             <h2>Student:</h2>
@@ -30,7 +33,9 @@
             <input type="text" name="capital" value="{{ $student->country->capital }}" class="form-control"><br>
 
             <input type="submit" value="Update" class="btn btn-success">
+            <a href="{{url('/')}}" class="btn btn-primary btn-sm" title="Return to table">Return</a>
         </form>
+
     </div>
 </div>
 @stop

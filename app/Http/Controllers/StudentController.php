@@ -8,13 +8,16 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     /*
-    Show data in view
+        Show data in view, returns index view
     */
     public function show(){
         $students = Student::with('academic', 'country')->get();
         return view("Index")->with("students", $students);
     }
 
+    /*
+        Displays complete student data.
+    */
     public function display(Student $student){
         return view('showStudent', compact('student'));
     }
@@ -24,6 +27,9 @@ class StudentController extends Controller
         return response()->json(['students'=>$students]);
     }
 
+    /*
+        Create new data
+    */
     public function store(Request $request){
         $student = Student::create($request->all());
 
@@ -48,14 +54,54 @@ class StudentController extends Controller
         return view('Edit', compact('student'));
     }
 
+
+    /*
+        Update data and return to index
+    */
     public function update(Request $request, $id){
         $student = Student::find($id);
         $student->update($request->all());
-        $student->academic()->update($request->input('academic'));
-        $student->country()->update($request->input('country'));
+
+        $student->academic()->update([
+            'course' => $request->course,
+            'year' => $request->year
+        ]);
+
+        $student->country()->update([
+            'continent' => $request->continent,
+            'country_name' => $request->country_name,
+            'capital' => $request->capital
+        ]);
+
+        $students = Student::with('academic', 'country')->get();
+        return view("Index")->with("students", $students);
+    }
+
+
+    /*
+        Update data
+    */
+    public function put(Request $request, $id){
+        $student = Student::find($id);
+        $student->update($request->all());
+
+        $student->academic()->update([
+            'course' => $request->course,
+            'year' => $request->year
+        ]);
+
+        $student->country()->update([
+            'continent' => $request->continent,
+            'country_name' => $request->country_name,
+            'capital' => $request->capital
+        ]);
+
         return response()->json(['student'=>$student]);
     }
 
+    /*
+        Delete data
+    */
     public function destroy($id){
         $student = Student::find($id);
         $student->academic()->delete();

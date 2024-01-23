@@ -19,6 +19,7 @@
             <p>Country: {{$student->country->country_name}}</p>
             <p>Capital: {{$student->country->capital}}</p>
             <hr>
+            <a href="{{url('/')}}" class="btn btn-primary btn-sm" title="Return to table">Return</a>
         </div>
     </div>
 @stop
