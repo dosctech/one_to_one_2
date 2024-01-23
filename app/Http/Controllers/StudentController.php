@@ -73,8 +73,7 @@ class StudentController extends Controller
             'capital' => $request->capital
         ]);
 
-        $students = Student::with('academic', 'country')->get();
-        return view("Index")->with("students", $students);
+        return redirect('/')->with('message', 'Student data updated');
     }
 
 
@@ -108,5 +107,17 @@ class StudentController extends Controller
         $student->country()->delete();
         $student->delete();
         return response()->json(["message"=>"Succssfully deleted student record."]);
+    }
+
+    /*
+        Delete data in view
+    */
+    public function delete($id){
+        $student = Student::find($id);
+        $student->academic()->delete();
+        $student->country()->delete();
+        $student->delete();
+
+        return redirect('/')->with('message', 'Student data Deleted');
     }
 }

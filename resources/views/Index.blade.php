@@ -37,7 +37,11 @@ In this view, add a delete button  for each data rendered, and if the delete dat
                                             <a href="{{url('students/'.$item->id.'/display')}}" class="btn btn-primary btn-sm" title="View Student data">View</a>
                                             <a href="{{url('students/'.$item->id.'/edit')}}" class="btn btn-secondary btn-sm" title="Edit Student data">Edit</a>
 
-                                            <a href="#" class="btn btn-danger btn-sm" title="Delete Student data">Delete</a>
+                                            <form action="{{ url('students/'.$item->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete student data">Delete</button>
+                                            </form>
 
                                         </td>
                                         </tr>

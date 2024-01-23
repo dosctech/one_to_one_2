@@ -25,9 +25,11 @@ Route::get('/create', function(){
 
 Route::get('students/{student}/edit', [StudentController::class, 'edit']);
 
-Route::get('students/{student}', [StudentController::class, 'update']);
+Route::put('students/{student}', [StudentController::class, 'update']);
 
 Route::get('students/{student}/display', [StudentController::class, 'display']);
+
+Route::delete('students/{student}', [StudentController::class, 'delete']);
 
 Route::get("/profile", function(){
     return view('showStudent');
