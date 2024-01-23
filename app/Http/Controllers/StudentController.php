@@ -44,7 +44,7 @@ class StudentController extends Controller
             'capital' => $request->capital
         ]);
 
-        return response()->json(["message"=>"Successfully inserted data."]);
+        return redirect('/')->with('message', 'Student data created');
     }
 
     /*
@@ -118,6 +118,6 @@ class StudentController extends Controller
         $student->country()->delete();
         $student->delete();
 
-        return redirect('/')->with('message', 'Student data Deleted');
+        return redirect('/')->with('message', 'Student data deleted');
     }
 }
