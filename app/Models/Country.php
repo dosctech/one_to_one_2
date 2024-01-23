@@ -12,7 +12,7 @@ class Country extends Model
 
     protected $fillable = [
         "continent",
-        "name",
+        "country_name",
         "capital"
     ];
 
