@@ -10,10 +10,10 @@ class StudentController extends Controller
     /*
         Show data in view, returns index view
     */
-    public function show(){
-        $students = Student::with('academic', 'country')->get();
-        return view("Index")->with("students", $students);
-    }
+    // public function show(){
+    //     $students = Student::with('academic', 'country')->get();
+    //     return view("Index")->with("students", $students);
+    // }
 
     /*
         Displays complete student data.
@@ -22,9 +22,13 @@ class StudentController extends Controller
         return view('showStudent', compact('student'));
     }
 
+    /*
+        Display data
+    */
     public function index(){
         $students = Student::with('academic', 'country')->get();
-        return response()->json(['students'=>$students]);
+        //return response()->json(['students'=>$students]);
+        return view("Index")->with("students", $students);
     }
 
     /*
@@ -54,9 +58,8 @@ class StudentController extends Controller
         return view('Edit', compact('student'));
     }
 
-
     /*
-        Update data and return to index
+        Update data
     */
     public function update(Request $request, $id){
         $student = Student::find($id);
@@ -74,28 +77,6 @@ class StudentController extends Controller
         ]);
 
         return redirect('/')->with('message', 'Student data updated');
-    }
-
-
-    /*
-        Update data
-    */
-    public function put(Request $request, $id){
-        $student = Student::find($id);
-        $student->update($request->all());
-
-        $student->academic()->update([
-            'course' => $request->course,
-            'year' => $request->year
-        ]);
-
-        $student->country()->update([
-            'continent' => $request->continent,
-            'country_name' => $request->country_name,
-            'capital' => $request->capital
-        ]);
-
-        return response()->json(['student'=>$student]);
     }
 
     /*

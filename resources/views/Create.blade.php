@@ -8,7 +8,7 @@ Create.blade.php : this view should allow creation of data
         <div class="card-body">
 
             <form action="{{url('api/students')}}" method="POST">
-                {!! csrf_field() !!}
+                @csrf
                 <h2>Student:</h2>
                 <label>Name</label><br>
                 <input type="text" name="name" id="name" class="form-control"><br>
