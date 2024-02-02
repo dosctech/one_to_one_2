@@ -2,39 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Academic;
+use App\Models\Country;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    /*
-        Show data in view, returns index view
-    */
-    // public function show(){
-    //     $students = Student::with('academic', 'country')->get();
-    //     return view("Index")->with("students", $students);
-    // }
-
-    /*
-        Displays complete student data.
-    */
-    public function display(Student $student){
-        return view('showStudent', compact('student'));
-    }
-
-    /*
-        Display data
-    */
     public function index(){
-        $students = Student::with('academic', 'country')->get();
-        //return response()->json(['students'=>$students]);
-        return view("Index")->with("students", $students);
+        $students = Student::all();
+        $countries = Country::all();
+        $academics = Academic::all();
+        return view("index", ['students' => $students, 'countries' => $countries, 'academics' => $academics]);
     }
 
-    /*
-        Create new data
-    */
+    
     public function store(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'age' => 'required|numeric',
+            'address' => 'required',
+            'course' => 'required',
+            'year' => 'required|numeric',
+            'continent' => 'required',
+            'country_name' => 'required',
+            'capital' => 'required',
+        ]);
+
         $student = Student::create($request->all());
 
         $student->academic()->create([
@@ -48,19 +42,25 @@ class StudentController extends Controller
             'capital' => $request->capital
         ]);
 
-        return redirect('/')->with('message', 'Student data created');
+        return redirect('/');
     }
 
-    /*
-        Edit data in view
-    */
+    public function showCountries()
+    {
+        $countries = Country::all();
+        return view("index", ['countries' => $countries]);
+    }
+
+    public function showAcademics()
+    {
+        $academics = Academic::all();
+        return view("index", ['academics' => $academics]);
+    }
+
     public function edit(Student $student){
         return view('Edit', compact('student'));
     }
 
-    /*
-        Update data
-    */
     public function update(Request $request, $id){
         $student = Student::find($id);
         $student->update($request->all());
@@ -79,9 +79,7 @@ class StudentController extends Controller
         return redirect('/')->with('message', 'Student data updated');
     }
 
-    /*
-        Delete data
-    */
+
     public function destroy($id){
         $student = Student::find($id);
         $student->academic()->delete();
