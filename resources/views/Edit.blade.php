@@ -20,6 +20,7 @@
             @endforeach
         </ul>
         @endif
+        
     </div>
     <div class="d-flex flex-column align-items-center justify-content-center" style="min-width: 100vh;">
     <div class="card" style="width: 18rem;">
