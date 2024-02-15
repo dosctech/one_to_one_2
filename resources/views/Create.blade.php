@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-<p class="h1 text-center my-5">Create Student Data</p>
+<p class="h3 my-5">Create</p>
     <div>
         @if($errors->all())
         <ul>
@@ -18,13 +18,11 @@
         </ul>
         @endif
     </div>
-    <div class="d-flex flex-column align-items-center justify-content-center" style="min-width: 100vh;">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
+    <div style="max-width: 300px;">
             <form method="post" action="{{route('store')}}">
                 @csrf
                 @method('post')
-                <p class="h2">Student</p>
+                <p class="">Student</p>
                 <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Name" />
@@ -40,7 +38,7 @@
                     <input type="text" class="form-control" id="address" name="address" placeholder="Address"/>
                 </div>
 
-                <p class="h2 mt-3">Academic</p>
+                <p class="mt-3">Academic</p>
                 <div class="form-group">
                     <label for="course">Course</label>
                     <input type="text" class="form-control" id="course" name="course" placeholder="Course" />
@@ -50,7 +48,7 @@
                     <input type="text" class="form-control" id="year" name="year" placeholder="Year"/>
                 </div>
 
-                <p class="h2 mt-3">Country</p>
+                <p class="mt-3">Country</p>
                 <div class="form-group">
                     <label for="subject">Continent</label>
                     <input type="text" class="form-control" id="continent" name="continent" placeholder="Continent" />
@@ -67,12 +65,6 @@
                 <button type="submit" class="btn btn-primary btn-block">Create Data</button>
 
             </form>
-        </div>
-    </div>
-    <br>
-    <div class="text-muted mt-2 mb-5">
-        <a href="{{route('index')}}" style="color: gray">Cancel Edit</a>
-    </div>
     
     </div>
 </body>
